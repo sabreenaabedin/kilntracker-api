@@ -1,9 +1,9 @@
 import { DefaultCrudRepository, juggler } from '@loopback/repository';
-import { User } from '../models/user.model';
 import { inject } from '@loopback/core';
+import { Ceramic } from '../models/ceramic.model';
 
-export class CeramicRepository extends DefaultCrudRepository<User, typeof User.prototype.id> {
+export class CeramicRepository extends DefaultCrudRepository<Ceramic, typeof Ceramic.prototype.id> {
     constructor(@inject('datasources.db') protected datasource: juggler.DataSource) {
-        super(User, datasource);
+        super(Ceramic, datasource);
     }
 }

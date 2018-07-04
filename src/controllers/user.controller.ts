@@ -20,6 +20,8 @@ export class UserController {
     return await this.userRepo.find();
   }
 
+  
+
   @get('/users/{id}')
   async findUsersById(@param.path.number('id') id: number): Promise<User> {
     let userExists: boolean = !!(await this.userRepo.count({ id }));
