@@ -1,10 +1,7 @@
 /// <reference types="express" />
 import { Request } from '@loopback/rest';
-/**
- * A simple controller to bounce back http requests
- */
-export declare class PingController {
+export declare class CeramicsController {
     private req;
     constructor(req: Request);
-    ping(): object;
+    ceramics(): Array<any>;
 }

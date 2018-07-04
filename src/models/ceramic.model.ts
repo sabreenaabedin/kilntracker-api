@@ -13,6 +13,35 @@ export class Ceramic extends Entity {
   })
   name: string;
 
+  @property({
+    type: 'string',
+  })
+  description: string;
+
+  @property({
+    type: 'string',
+  })
+  slideshow: string;
+
+  @property({
+    type: 'string',
+  })
+  tracking: string;
+
+  @property({
+    type: 'number',
+  })
+  weight: number;
+
+  @property({
+    type: 'number',
+  })
+  height: number;
+
+  @property({
+    type: 'string',
+  })
+  glaze: string;
 
   getId() {
     return this.id;

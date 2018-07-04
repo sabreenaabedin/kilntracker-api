@@ -15,32 +15,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const rest_1 = require("@loopback/rest");
 const openapi_v3_1 = require("@loopback/openapi-v3");
 const context_1 = require("@loopback/context");
-/**
- * A simple controller to bounce back http requests
- */
-let PingController = class PingController {
+let CeramicsController = class CeramicsController {
     constructor(req) {
         this.req = req;
     }
-    // Map to `GET /ping`
-    ping() {
-        return {
-            greeting: 'Hello from LoopBack',
-            date: new Date(),
-            url: this.req.url,
-            headers: Object.assign({}, this.req.headers),
-        };
+    ceramics() {
+        var ceramics = new Array();
+        return ceramics;
     }
 };
 __decorate([
-    openapi_v3_1.get('/ping'),
+    openapi_v3_1.get('/ceramics'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Object)
-], PingController.prototype, "ping", null);
-PingController = __decorate([
+    __metadata("design:returntype", Array)
+], CeramicsController.prototype, "ceramics", null);
+CeramicsController = __decorate([
     __param(0, context_1.inject(rest_1.RestBindings.Http.REQUEST)),
     __metadata("design:paramtypes", [Object])
-], PingController);
-exports.PingController = PingController;
-//# sourceMappingURL=ping.controller.js.map
+], CeramicsController);
+exports.CeramicsController = CeramicsController;
+//# sourceMappingURL=ceramics.controller.js.map
