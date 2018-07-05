@@ -20,21 +20,10 @@ let CeramicsController = class CeramicsController {
     constructor(ceramicRepo) {
         this.ceramicRepo = ceramicRepo;
     }
-    ceramics() {
-        var ceramics = new Array();
-        ceramic1: ceramic_model_1.Ceramic;
-        // ceramic1.name = 1;
-        return ceramics;
+    async ceramics() {
+        return await this.ceramicRepo.find();
     }
-    // @get("/ceramics/{ceramicId}")
-    // getSpecificPizza(@param.path.string("pizzaId") pizzaId: string
-    // ): any {
-    //   if (pizzaId == "1") {
-    //     return "ABC";
-    //   }
-    //   throw new HttpErrors.NotFound("Sorry, item not found");
-    // }
-    async createPizza(ceramic) {
+    async createCeramic(ceramic) {
         let createdCeramic = await this.ceramicRepo.create(ceramic);
         return createdCeramic;
     }
@@ -43,7 +32,7 @@ __decorate([
     rest_1.get('/ceramics'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Array)
+    __metadata("design:returntype", Promise)
 ], CeramicsController.prototype, "ceramics", null);
 __decorate([
     rest_1.post("/ceramics"),
@@ -51,7 +40,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [ceramic_model_1.Ceramic]),
     __metadata("design:returntype", Promise)
-], CeramicsController.prototype, "createPizza", null);
+], CeramicsController.prototype, "createCeramic", null);
 CeramicsController = __decorate([
     __param(0, repository_1.repository(ceramic_repository_1.CeramicRepository.name)),
     __metadata("design:paramtypes", [ceramic_repository_1.CeramicRepository])

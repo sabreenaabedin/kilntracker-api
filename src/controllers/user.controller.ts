@@ -6,8 +6,10 @@ import {
   HttpErrors,
   get,
   param,
+  post,
   Request,
-  RestBindings
+  RestBindings,
+  requestBody
 } from '@loopback/rest';
 
 export class UserController {
@@ -20,8 +22,6 @@ export class UserController {
     return await this.userRepo.find();
   }
 
-  
-
   @get('/users/{id}')
   async findUsersById(@param.path.number('id') id: number): Promise<User> {
     let userExists: boolean = !!(await this.userRepo.count({ id }));
@@ -33,7 +33,11 @@ export class UserController {
     return await this.userRepo.findById(id);
   }
 
-  // @post('/register'){
-  //   return {}
-  // }
+  @post("/register")
+  async createUser(@requestBody() user: User): Promise<User> {
+
+    let newUser = await this.userRepo.create(user);
+    return newUser;
+
+  }
 }
