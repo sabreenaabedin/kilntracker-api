@@ -28,6 +28,42 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], Ceramic.prototype, "name", void 0);
+__decorate([
+    repository_1.property({
+        type: 'string',
+    }),
+    __metadata("design:type", String)
+], Ceramic.prototype, "description", void 0);
+__decorate([
+    repository_1.property({
+        type: 'string',
+    }),
+    __metadata("design:type", String)
+], Ceramic.prototype, "photo", void 0);
+__decorate([
+    repository_1.property({
+        type: 'string',
+    }),
+    __metadata("design:type", String)
+], Ceramic.prototype, "tracking", void 0);
+__decorate([
+    repository_1.property({
+        type: 'number',
+    }),
+    __metadata("design:type", Number)
+], Ceramic.prototype, "weight", void 0);
+__decorate([
+    repository_1.property({
+        type: 'number',
+    }),
+    __metadata("design:type", Number)
+], Ceramic.prototype, "height", void 0);
+__decorate([
+    repository_1.property({
+        type: 'string',
+    }),
+    __metadata("design:type", String)
+], Ceramic.prototype, "glaze", void 0);
 Ceramic = __decorate([
     repository_1.model()
 ], Ceramic);

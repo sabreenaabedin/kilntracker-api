@@ -13,11 +13,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const repository_1 = require("@loopback/repository");
-const user_model_1 = require("../models/user.model");
 const core_1 = require("@loopback/core");
+const ceramic_model_1 = require("../models/ceramic.model");
 let CeramicRepository = class CeramicRepository extends repository_1.DefaultCrudRepository {
     constructor(datasource) {
-        super(user_model_1.User, datasource);
+        super(ceramic_model_1.Ceramic, datasource);
         this.datasource = datasource;
     }
 };

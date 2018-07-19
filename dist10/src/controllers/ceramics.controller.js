@@ -13,26 +13,37 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const rest_1 = require("@loopback/rest");
-const openapi_v3_1 = require("@loopback/openapi-v3");
-const context_1 = require("@loopback/context");
+const ceramic_model_1 = require("../models/ceramic.model");
+const repository_1 = require("@loopback/repository");
+const ceramic_repository_1 = require("../repositories/ceramic.repository");
 let CeramicsController = class CeramicsController {
-    constructor(req) {
-        this.req = req;
+    constructor(ceramicRepo) {
+        this.ceramicRepo = ceramicRepo;
     }
-    ceramics() {
-        var ceramics = new Array();
-        return ceramics;
+    async ceramics() {
+        return await this.ceramicRepo.find();
+    }
+    async createCeramic(ceramic) {
+        let createdCeramic = await this.ceramicRepo.create(ceramic);
+        return createdCeramic;
     }
 };
 __decorate([
-    openapi_v3_1.get('/ceramics'),
+    rest_1.get('/ceramics'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Array)
+    __metadata("design:returntype", Promise)
 ], CeramicsController.prototype, "ceramics", null);
+__decorate([
+    rest_1.post("/ceramics"),
+    __param(0, rest_1.requestBody()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [ceramic_model_1.Ceramic]),
+    __metadata("design:returntype", Promise)
+], CeramicsController.prototype, "createCeramic", null);
 CeramicsController = __decorate([
-    __param(0, context_1.inject(rest_1.RestBindings.Http.REQUEST)),
-    __metadata("design:paramtypes", [Object])
+    __param(0, repository_1.repository(ceramic_repository_1.CeramicRepository.name)),
+    __metadata("design:paramtypes", [ceramic_repository_1.CeramicRepository])
 ], CeramicsController);
 exports.CeramicsController = CeramicsController;
 //# sourceMappingURL=ceramics.controller.js.map

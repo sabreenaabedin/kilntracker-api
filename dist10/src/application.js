@@ -19,7 +19,12 @@ class KilntrackerApiApplication extends boot_1.BootMixin(repository_1.Repository
         };
         var dataSourceConfig = new repository_1.juggler.DataSource({
             name: "db",
-            connector: "memory"
+            connector: "loopback-connector-mysql",
+            host: 'localhost',
+            port: 3306,
+            database: 'kiln',
+            user: 'root',
+            password: 'root1234'
         });
         this.dataSource(dataSourceConfig);
     }

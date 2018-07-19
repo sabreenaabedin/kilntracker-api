@@ -39,7 +39,7 @@ __decorate([
         type: 'string',
     }),
     __metadata("design:type", String)
-], Ceramic.prototype, "slideshow", void 0);
+], Ceramic.prototype, "photo", void 0);
 __decorate([
     repository_1.property({
         type: 'string',

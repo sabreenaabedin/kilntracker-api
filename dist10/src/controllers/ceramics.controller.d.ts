@@ -1,7 +1,8 @@
-/// <reference types="express" />
-import { Request } from '@loopback/rest';
+import { Ceramic } from '../models/ceramic.model';
+import { CeramicRepository } from '../repositories/ceramic.repository';
 export declare class CeramicsController {
-    private req;
-    constructor(req: Request);
-    ceramics(): Array<any>;
+    private ceramicRepo;
+    constructor(ceramicRepo: CeramicRepository);
+    ceramics(): Promise<Array<Ceramic>>;
+    createCeramic(ceramic: Ceramic): Promise<Ceramic>;
 }

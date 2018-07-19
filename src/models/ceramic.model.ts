@@ -21,7 +21,7 @@ export class Ceramic extends Entity {
   @property({
     type: 'string',
   })
-  slideshow: string;
+  photo: string;
 
   @property({
     type: 'string',
