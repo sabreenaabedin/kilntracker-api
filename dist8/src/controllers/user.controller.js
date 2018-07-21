@@ -23,12 +23,12 @@ let UserController = class UserController {
     async findUsers() {
         return await this.userRepo.find();
     }
-    async findUsersById(id) {
-        let userExists = !!(await this.userRepo.count({ id }));
+    async findUsersById(email) {
+        let userExists = !!(await this.userRepo.count({ email }));
         if (!userExists) {
-            throw new rest_1.HttpErrors.BadRequest(`user ID ${id} does not exist`);
+            throw new rest_1.HttpErrors.BadRequest(`user ID ${email} does not exist`);
         }
-        return await this.userRepo.findById(id);
+        return await this.userRepo.findById(email);
     }
     async createUser(user) {
         let newUser = await this.userRepo.create(user);
@@ -42,10 +42,10 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findUsers", null);
 __decorate([
-    rest_1.get('/users/{id}'),
-    __param(0, rest_1.param.path.number('id')),
+    rest_1.get('/users/{email}'),
+    __param(0, rest_1.param.path.number('email')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findUsersById", null);
 __decorate([

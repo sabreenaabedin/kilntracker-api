@@ -7,8 +7,6 @@ import {
   get,
   param,
   post,
-  Request,
-  RestBindings,
   requestBody
 } from '@loopback/rest';
 
@@ -22,15 +20,15 @@ export class UserController {
     return await this.userRepo.find();
   }
 
-  @get('/users/{id}')
-  async findUsersById(@param.path.number('id') id: number): Promise<User> {
-    let userExists: boolean = !!(await this.userRepo.count({ id }));
+  @get('/users/{email}')
+  async findUsersById(@param.path.number('email') email:string): Promise<User> {
+    let userExists: boolean = !!(await this.userRepo.count({ email }));
 
     if (!userExists) {
-      throw new HttpErrors.BadRequest(`user ID ${id} does not exist`);
+      throw new HttpErrors.BadRequest(`user ID ${email} does not exist`);
     }
 
-    return await this.userRepo.findById(id);
+    return await this.userRepo.findById(email);
   }
 
   @post("/register")

@@ -16,7 +16,7 @@ export class CeramicsController {
 
   @post("/ceramics")
   async createCeramic(@requestBody() ceramic: Ceramic): Promise<Ceramic> {
-
+    
     let createdCeramic = await this.ceramicRepo.create(ceramic);
     return createdCeramic;
 
