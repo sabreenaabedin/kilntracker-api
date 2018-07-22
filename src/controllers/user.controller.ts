@@ -1,7 +1,7 @@
 import { repository } from '@loopback/repository';
 import { UserRepository } from '../repositories/user.repository';
 import { User } from '../models/user.model';
-import {inject} from '@loopback/context';
+import { sign, verify } from 'jsonwebtoken'
 import {
   HttpErrors,
   get,
@@ -22,6 +22,15 @@ export class UserController {
 
   @get('/users/{email}')
   async findUsersById(@param.path.string('email') email:string): Promise<User> {
+
+    // try {
+    //   let payload = verify(jwt, 'shh') as any;
+    //   //payload.user.id;
+    //   return payload;
+    // } catch (err) {
+    //   throw new HttpErrors.Unauthorized('Invalid token');
+    // }
+    
     let userExists: boolean = !!(await this.userRepo.count({ email }));
 
     if (!userExists) {
@@ -31,9 +40,28 @@ export class UserController {
     return await this.userRepo.findById(email);
   }
 
-  @post("/register")
+  @post('/register')
   async createUser(@requestBody() user: User): Promise<User> {
+    let newUser = new User();
+    newUser.email = user.email;
+    newUser.password = user.password;
+    
+    // let jwt = sign(
+    //   {
+    //     user: {
+    //       id: createdUser.id,
+    //       email: createdUser.email
+    //     },
+    //   },
+    //   'shh',
+    //   {
+    //     issuer: 'auth.ix.com',
+    //     audience: 'ix.com',
+    //   },
+    // );
+
     return await this.userRepo.create(user);
+
 
   }
 }

@@ -24,6 +24,13 @@ let UserController = class UserController {
         return await this.userRepo.find();
     }
     async findUsersById(email) {
+        // try {
+        //   let payload = verify(jwt, 'shh') as any;
+        //   //payload.user.id;
+        //   return payload;
+        // } catch (err) {
+        //   throw new HttpErrors.Unauthorized('Invalid token');
+        // }
         let userExists = !!(await this.userRepo.count({ email }));
         if (!userExists) {
             throw new rest_1.HttpErrors.BadRequest(`user ID ${email} does not exist`);
@@ -31,6 +38,22 @@ let UserController = class UserController {
         return await this.userRepo.findById(email);
     }
     async createUser(user) {
+        let newUser = new user_model_1.User();
+        newUser.email = user.email;
+        newUser.password = user.password;
+        // let jwt = sign(
+        //   {
+        //     user: {
+        //       id: createdUser.id,
+        //       email: createdUser.email
+        //     },
+        //   },
+        //   'shh',
+        //   {
+        //     issuer: 'auth.ix.com',
+        //     audience: 'ix.com',
+        //   },
+        // );
         return await this.userRepo.create(user);
     }
 };
@@ -48,7 +71,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findUsersById", null);
 __decorate([
-    rest_1.post("/register"),
+    rest_1.post('/register'),
     __param(0, rest_1.requestBody()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_model_1.User]),
