@@ -21,7 +21,7 @@ export class UserController {
   }
 
   @get('/users/{email}')
-  async findUsersById(@param.path.number('email') email:string): Promise<User> {
+  async findUsersById(@param.path.string('email') email:string): Promise<User> {
     let userExists: boolean = !!(await this.userRepo.count({ email }));
 
     if (!userExists) {
@@ -33,9 +33,7 @@ export class UserController {
 
   @post("/register")
   async createUser(@requestBody() user: User): Promise<User> {
-
-    let newUser = await this.userRepo.create(user);
-    return newUser;
+    return await this.userRepo.create(user);
 
   }
 }

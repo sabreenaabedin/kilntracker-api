@@ -31,8 +31,7 @@ let UserController = class UserController {
         return await this.userRepo.findById(email);
     }
     async createUser(user) {
-        let newUser = await this.userRepo.create(user);
-        return newUser;
+        return await this.userRepo.create(user);
     }
 };
 __decorate([
@@ -43,7 +42,7 @@ __decorate([
 ], UserController.prototype, "findUsers", null);
 __decorate([
     rest_1.get('/users/{email}'),
-    __param(0, rest_1.param.path.number('email')),
+    __param(0, rest_1.param.path.string('email')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)

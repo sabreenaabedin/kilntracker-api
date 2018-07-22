@@ -4,18 +4,8 @@ import { Entity, property, model } from '@loopback/repository';
 export class User extends Entity {
   @property({
     type: 'string',
-    id: true,
-  })
-  firstname: string;
-
-  @property({
-    type: 'string',
-  })
-  lastname: string;
-
-  @property({
-    type: 'string',
     required: true,
+    id: true,
   })
   email: string;
 
