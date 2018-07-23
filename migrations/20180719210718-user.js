@@ -20,12 +20,6 @@ exports.up = function (db, callback) {
       type: 'string',
       primaryKey: true,
     },
-    firstname: {
-      type: 'string',
-    },
-    lastname: {
-      type: 'string',
-    },
     password: {
       type: 'string',
     }
