@@ -42,7 +42,12 @@ exports.up = function (db, callback) {
     glaze: {
       type: 'string',
     },
-    
+    useremail: {
+      type: 'string'
+    },
+    date: {
+      type: 'date'
+    }
   }, callback);
 };
 

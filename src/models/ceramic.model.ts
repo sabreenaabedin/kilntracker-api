@@ -43,6 +43,16 @@ export class Ceramic extends Entity {
   })
   glaze: string;
 
+  @property({
+    type: 'string',
+  })
+  useremail: string;
+
+  @property({
+    type: 'date',
+  })
+  date: Date;
+
   getId() {
     return this.id;
   }
