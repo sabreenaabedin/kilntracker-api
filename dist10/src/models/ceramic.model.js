@@ -64,6 +64,18 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], Ceramic.prototype, "glaze", void 0);
+__decorate([
+    repository_1.property({
+        type: 'string',
+    }),
+    __metadata("design:type", String)
+], Ceramic.prototype, "useremail", void 0);
+__decorate([
+    repository_1.property({
+        type: 'date',
+    }),
+    __metadata("design:type", Date)
+], Ceramic.prototype, "date", void 0);
 Ceramic = __decorate([
     repository_1.model()
 ], Ceramic);

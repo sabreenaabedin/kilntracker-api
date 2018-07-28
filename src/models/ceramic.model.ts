@@ -48,10 +48,10 @@ export class Ceramic extends Entity {
   })
   useremail: string;
 
-  @property({
-    type: 'date',
-  })
-  date: Date;
+  // @property({
+  //   type: 'Date',
+  // })
+  // date: Date;
 
   getId() {
     return this.id;

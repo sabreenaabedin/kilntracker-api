@@ -8,5 +8,6 @@ export declare class Ceramic extends Entity {
     weight: number;
     height: number;
     glaze: string;
+    useremail: string;
     getId(): number | undefined;
 }
