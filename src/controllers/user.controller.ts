@@ -21,30 +21,28 @@ export class UserController {
     return await this.userRepo.find();
   }
 
-  // @get('/users/{email}')
-  // async findUsersById(@param.path.string('email') email: string): Promise<String> {
+  @get('/user/{jwt}')
+  async findUsersById(@param.path.string('jwt') jwt: string): Promise<String> {
+    var foundUser = new User();
+    var foundUserEmail: string = "";
+    
+    try {
+      let payload = verify(jwt, 'secretKey') as any;
+      foundUserEmail = payload.user.email;
+    } catch (err) {
+      throw new HttpErrors.Unauthorized('Invalid token');
+    }
 
+     let userExists: boolean = !!(await this.userRepo.count({ foundUserEmail }));
 
-  //   var jwt: string = "";
+    if (!userExists) {
+      throw new HttpErrors.BadRequest(`user does not exist`);
+    }
 
-  //   // try {
-  //   //   let payload = verify(jwt, 'shh') as any;
-  //   //   //payload.user.id;
-  //   //   return payload;
-  //   // } catch (err) {
-  //   //   throw new HttpErrors.Unauthorized('Invalid token');
-  //   // }
+    await this.userRepo.findById(foundUserEmail)
 
-  //   // let userExists: boolean = !!(await this.userRepo.count({ email }));
-
-  //   // if (!userExists) {
-  //   //   throw new HttpErrors.BadRequest(`user ID ${email} does not exist`);
-  //   // }
-
-  //   await this.userRepo.findById(email)
-
-  //   return jwt;
-  // }
+    return jwt;
+  }
 
   @post('/login')
   async login(@requestBody() user: User) {

@@ -3,6 +3,7 @@ import { inject } from '@loopback/context';
 import { Ceramic } from '../models/ceramic.model';
 import { repository } from '@loopback/repository';
 import { CeramicRepository } from '../repositories/ceramic.repository';
+import { sign, verify } from 'jsonwebtoken';
 
 export class CeramicsController {
   constructor(
@@ -20,6 +21,24 @@ export class CeramicsController {
     let createdCeramic = await this.ceramicRepo.create(ceramic);
     return createdCeramic;
 
+  }
+
+  @get('/ceramics/{jwt}')
+  async ceramicsByUser(@param.path.string('jwt') jwt: string): Promise<Array<Ceramic>> {
+    
+   var requestedEmail: string = "";
+   // get user
+   try {
+    let payload = verify(jwt, 'secretKey') as any;
+    requestedEmail = payload.user.email;
+  } catch (err) {
+    throw new HttpErrors.Unauthorized('Invalid token');
+  }
+
+    return await this.ceramicRepo.find({
+      where:
+      { useremail: requestedEmail}
+    });
   }
 
 }

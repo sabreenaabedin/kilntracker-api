@@ -39,7 +39,15 @@ exports.up = function (db, callback) {
       type: 'string',
     },
     useremail: {
-      type: 'string'
+      type: 'string',
+      foreignKey: {
+        name: 'user_fk',
+        table: 'user',
+        rules: {
+          onDelete: 'CASCADE',
+          onUpdate: 'RESTRICT'
+        },
+        mapping: 'email'}
     },
     date: {
       type: 'date'
@@ -48,7 +56,13 @@ exports.up = function (db, callback) {
 };
 
 exports.down = function (db, callback) {
-  db.dropTable('ceramic', callback);
+  db.dropTable('ceramic');
+  db.removeForeignKey('ceramic', 'user_ceramic_fk',
+    {
+      dropIndex: true,
+    }, callback);
+  
+
 };
 
 exports._meta = {

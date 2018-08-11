@@ -45,6 +45,7 @@ export class Ceramic extends Entity {
 
   @property({
     type: 'string',
+    id: true,
   })
   useremail: string;
 

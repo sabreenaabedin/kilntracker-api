@@ -25,23 +25,22 @@ let UserController = class UserController {
     async findUsers() {
         return await this.userRepo.find();
     }
-    // @get('/users/{email}')
-    // async findUsersById(@param.path.string('email') email: string): Promise<String> {
-    //   var jwt: string = "";
-    //   // try {
-    //   //   let payload = verify(jwt, 'shh') as any;
-    //   //   //payload.user.id;
-    //   //   return payload;
-    //   // } catch (err) {
-    //   //   throw new HttpErrors.Unauthorized('Invalid token');
-    //   // }
-    //   // let userExists: boolean = !!(await this.userRepo.count({ email }));
-    //   // if (!userExists) {
-    //   //   throw new HttpErrors.BadRequest(`user ID ${email} does not exist`);
-    //   // }
-    //   await this.userRepo.findById(email)
-    //   return jwt;
-    // }
+    async findUsersById(jwt) {
+        var foundUser = new user_model_1.User();
+        try {
+            let payload = jsonwebtoken_1.verify(jwt, 'secretKey');
+            foundUser = payload.user;
+        }
+        catch (err) {
+            throw new rest_1.HttpErrors.Unauthorized('Invalid token');
+        }
+        let userExists = !!(await this.userRepo.count({ foundUser: .email }));
+        // if (!userExists) {
+        //   throw new HttpErrors.BadRequest(`user ID ${email} does not exist`);
+        // }
+        await this.userRepo.findById(email);
+        return jwt;
+    }
     async login(user) {
         // check for login info
         if (!user.email || !user.password) {
@@ -94,6 +93,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findUsers", null);
+__decorate([
+    rest_1.get('/user/{jwt}'),
+    __param(0, rest_1.param.path.string('jwt')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "findUsersById", null);
 __decorate([
     rest_1.post('/login'),
     __param(0, rest_1.requestBody()),
